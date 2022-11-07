@@ -1,4 +1,6 @@
 from flask_sqlalchemy import SQLAlchemy
+from sqlalchemy.ext.hybrid import hybrid_property
+from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
 
@@ -17,3 +19,13 @@ class User(db.Model):
             "email": self.email,
             # do not serialize the password, its a security breach
         }
+    @hybrid_property
+    def password(self):
+        return self._password
+
+    @password.setter
+    def password(self, password):
+        self._password = generate_password_hash(password)
+
+    def check_password_hash(self, password):
+        return check_password_hash(self.password, password)
