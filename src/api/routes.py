@@ -21,7 +21,7 @@ def sign_up():
        
    return jsonify([]), 200
 
-@app.route("/login", methods=["POST"])
+@api.route("/login", methods=["POST"])
 def login():
     email = request.json.get("email", None)
     password = request.json.get("pass", None)
