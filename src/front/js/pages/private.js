@@ -6,8 +6,8 @@ import rigoImageUrl from "../../img/rigo-baby.jpg";
 
 export const Private = () => {
   return (
-    <div className="jumbotron">
-      <h1 className="display-4">Private</h1>
+    <div className="text-center mt-5">
+      <h1 className="PRIVATE">Private</h1>
       <img src={rigoImageUrl} />
       <hr className="my-4" />
     </div>

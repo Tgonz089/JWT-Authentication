@@ -17,15 +17,11 @@ export const Login = () => {
     };
 
 
-  if(store.token && store.token != "" && store.token != undefined) navigate("/");
+  // if(store.token && store.token != "" && store.token != undefined) navigate("/private");
 
   return (
     <div className="text-center mt-5">
       <h1 className="header">Login</h1>
-
-      {store.token && store.token != "" && store.token != undefined ? (
-        "You are logged in with this token" + store.token
-      ) : (
         <div>
           <input
             type="text"
@@ -41,7 +37,6 @@ export const Login = () => {
           />
           <button onClick={handleClick}>Login</button>
         </div>
-      )}
     </div>
   );
 };
