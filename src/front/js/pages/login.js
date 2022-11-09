@@ -13,7 +13,7 @@ export const Login = () => {
   console.log("This is your token", store.token);
 
   const handleClick = () => {
-    actions.login(email, password);
+    actions.login(email, password); //navigate("/private");
     };
 
 

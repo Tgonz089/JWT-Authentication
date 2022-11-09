@@ -1,8 +1,9 @@
 const getState = ({ getStore, getActions, setStore }) => {
   return {
     store: {
-      token: [],
-      message: null,
+      token: null,
+      errorMessage: null,
+      message:null,
       demo: [
         {
           title: "FIRST",
@@ -21,20 +22,26 @@ const getState = ({ getStore, getActions, setStore }) => {
 
       verifyUser: (token) => {
         fetch(
-          "https://3001-tgonz089-jwtauthenticat-hg29mgdqpeo.ws-us75.gitpod.io/api/protected",
+          "https://3001-tgonz089-jwtauthenticat-ooe4lzs1hr0.ws-us75.gitpod.io/api/protected",
           {
             method: "GET",
             headers: { Authorization: `Bearer ${token}` },
           }
         )
-          .then((response) => response.json())
-          .then((result) => setStore({ token: result }))
-          .catch((error) => console.log(error));
+          .then((response) => { 
+            if (response.status >= 400){
+              setStore({errorMessage: "An error has occured. Please Login."})
+            }
+            console.log(response.status)
+           return response.json()
+          })
+          .then((result) => console.log(result))
+          .catch((error) => console.log("There is an error:",error));
       },
 
       signup: (email, password) => {
         fetch(
-          "https://3001-tgonz089-jwtauthenticat-hg29mgdqpeo.ws-us75.gitpod.io/api/signup",
+          "https://3001-tgonz089-jwtauthenticat-ooe4lzs1hr0.ws-us75.gitpod.io/api/signup",
           {
             method: "POST",
             headers: { "Content-Type": "application/json" },
@@ -71,7 +78,7 @@ const getState = ({ getStore, getActions, setStore }) => {
 
         try {
           const resp = await fetch(
-            "https://3001-tgonz089-jwtauthenticat-qkc51gdsiw3.ws-us74.gitpod.io/api/login",
+            "https://3001-tgonz089-jwtauthenticat-ooe4lzs1hr0.ws-us75.gitpod.io/api/login",
             opts
           );
           if (resp.status !== 200) {
@@ -97,7 +104,7 @@ const getState = ({ getStore, getActions, setStore }) => {
         };
         // fetching data from the backend
         fetch(
-          "https://3001-tgonz089-jwtauthenticat-qkc51gdsiw3.ws-us74.gitpod.io/api/hello",
+          "https://3001-tgonz089-jwtauthenticat-ooe4lzs1hr0.ws-us75.gitpod.io/api/hello",
           opts
         )
           .then((resp) => resp.json())

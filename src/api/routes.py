@@ -18,7 +18,10 @@ def protected():
     # Access the identity of the current user with get_jwt_identity
     current_user = get_jwt_identity()
     user = User.query.filter_by(email=current_user).first()
-    return jsonify(logged_in_as=current_user), 200
+    if user:
+        return jsonify(logged_in_as=current_user), 200
+    else:
+        return jsonify({"msg": "Error with the token."})
 
 @api.route("/signup", methods=["POST"])
 def sign_up():
